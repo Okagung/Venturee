@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  id_admin    Int      @id @default(autoincrement())
+  nama_admin  String
+  email_admin String   @unique
+  pw_admin    String
+}
+
+model User {
+  id_user    Int      @id @default(autoincrement())
+  nama_user  String
+  email_user String   @unique
+  pw_user    String
+  no_telp    String
+}
+
+model Event {
+  id_event        Int      @id @default(autoincrement())
+  nama_event      String
+  deskripsi_event String
+  harga_event     Float
+  kuota           Int
+  jadwal_event    DateTime
+}
+
+model Keranjang {
+  id_keranjang Int @id @default(autoincrement())
+  id_user      Int
+  id_event     Int
+}
+
+model Transaksi {
+  id_transaksi    Int      @id @default(autoincrement())
+  id_user         Int
+  id_event        Int
+  tgl_transaksi   DateTime @default(now())
+  total_harga     Float
+  status_bayar    String
+}
