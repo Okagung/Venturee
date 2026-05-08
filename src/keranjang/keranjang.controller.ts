@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, Param, UseGuards } from '@nestjs/common';
 import { KeranjangService } from './keranjang.service';
 import { CreateKeranjangDto } from './dto/create-keranjang.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('keranjang')
+@UseGuards(JwtAuthGuard)
 export class KeranjangController {
   constructor(private readonly keranjangService: KeranjangService) {}
 

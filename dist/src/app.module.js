@@ -15,12 +15,13 @@ const auth_module_1 = require("./auth/auth.module");
 const events_module_1 = require("./events/events.module");
 const keranjang_module_1 = require("./keranjang/keranjang.module");
 const transaksi_module_1 = require("./transaksi/transaksi.module");
+const admin_module_1 = require("./admin/admin.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, auth_module_1.AuthModule, events_module_1.EventsModule, keranjang_module_1.KeranjangModule, transaksi_module_1.TransaksiModule],
+        imports: [prisma_module_1.PrismaModule, auth_module_1.AuthModule, events_module_1.EventsModule, keranjang_module_1.KeranjangModule, transaksi_module_1.TransaksiModule, admin_module_1.AdminModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

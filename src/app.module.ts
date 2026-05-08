@@ -6,9 +6,10 @@ import { AuthModule } from './auth/auth.module';
 import { EventsModule } from './events/events.module';
 import { KeranjangModule } from './keranjang/keranjang.module';
 import { TransaksiModule } from './transaksi/transaksi.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
-  imports: [PrismaModule, AuthModule, EventsModule, KeranjangModule, TransaksiModule],
+  imports: [PrismaModule, AuthModule, EventsModule, KeranjangModule, TransaksiModule, AdminModule],
   controllers: [AppController],
   providers: [AppService],
 })

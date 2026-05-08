@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Put, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Body, Param, UseGuards } from '@nestjs/common';
 import { TransaksiService } from './transaksi.service';
 import { CreateTransaksiDto } from './dto/create-transaksi.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('transaksi')
+@UseGuards(JwtAuthGuard)
 export class TransaksiController {
   constructor(private readonly transaksiService: TransaksiService) {}
 

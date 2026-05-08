@@ -16,6 +16,7 @@ exports.KeranjangController = void 0;
 const common_1 = require("@nestjs/common");
 const keranjang_service_1 = require("./keranjang.service");
 const create_keranjang_dto_1 = require("./dto/create-keranjang.dto");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 let KeranjangController = class KeranjangController {
     keranjangService;
     constructor(keranjangService) {
@@ -55,6 +56,7 @@ __decorate([
 ], KeranjangController.prototype, "remove", null);
 exports.KeranjangController = KeranjangController = __decorate([
     (0, common_1.Controller)('keranjang'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __metadata("design:paramtypes", [keranjang_service_1.KeranjangService])
 ], KeranjangController);
 //# sourceMappingURL=keranjang.controller.js.map

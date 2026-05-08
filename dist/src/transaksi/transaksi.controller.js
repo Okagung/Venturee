@@ -16,6 +16,7 @@ exports.TransaksiController = void 0;
 const common_1 = require("@nestjs/common");
 const transaksi_service_1 = require("./transaksi.service");
 const create_transaksi_dto_1 = require("./dto/create-transaksi.dto");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 let TransaksiController = class TransaksiController {
     transaksiService;
     constructor(transaksiService) {
@@ -65,6 +66,7 @@ __decorate([
 ], TransaksiController.prototype, "updateStatus", null);
 exports.TransaksiController = TransaksiController = __decorate([
     (0, common_1.Controller)('transaksi'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __metadata("design:paramtypes", [transaksi_service_1.TransaksiService])
 ], TransaksiController);
 //# sourceMappingURL=transaksi.controller.js.map
