@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Venturee - Platform pembelian tiket event terbaik">
+  <title>Venturee - Discover Events</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <span class="navbar-brand" onclick="location.href='index.html'">Venturee</span>
+    <div class="navbar-actions">
+      <button class="nav-btn nav-btn-ghost" onclick="location.href='keranjang.html'" id="btn-keranjang">🛒 Keranjang</button>
+      <button class="nav-btn nav-btn-danger" onclick="handleLogout()" id="btn-logout">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input type="text" class="search-input" id="search-input" placeholder="Cari event yang kamu mau...">
+      <button class="btn btn-primary" onclick="handleSearch()" id="btn-search">Cari</button>
+      <button class="btn btn-secondary" onclick="fetchEvents()" id="btn-reset">Reset</button>
+    </div>
+
+    <!-- Events Container -->
+    <div id="events-container">
+      <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <span class="loading-text">Memuat event...</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

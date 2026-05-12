@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Venturee - Login atau Daftar akun">
+  <title>Login - Venturee</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <h1 class="auth-logo">Venturee</h1>
+      <p class="auth-subtitle">Platform Event Terbaik</p>
+
+      <!-- Tabs Login / Register -->
+      <div class="tabs">
+        <button class="tab active" id="tab-login" onclick="switchAuthTab('login')">Login</button>
+        <button class="tab" id="tab-register" onclick="switchAuthTab('register')">Daftar</button>
+      </div>
+
+      <div id="message-container"></div>
+
+      <!-- Login Form -->
+      <div id="form-login">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Email</label>
+          <input type="email" class="form-input" id="login-email" placeholder="Masukkan email">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <input type="password" class="form-input" id="login-password" placeholder="Masukkan password">
+        </div>
+        <button class="btn btn-primary btn-full btn-lg" onclick="handleLogin()" id="btn-login" style="margin-top:8px;">
+          Login
+        </button>
+      </div>
+
+      <!-- Register Form (hidden by default) -->
+      <div id="form-register" style="display:none;">
+        <div class="form-group">
+          <label class="form-label" for="reg-username">Username</label>
+          <input type="text" class="form-input" id="reg-username" placeholder="Masukkan username">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-email">Email</label>
+          <input type="email" class="form-input" id="reg-email" placeholder="Masukkan email">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-password">Password</label>
+          <input type="password" class="form-input" id="reg-password" placeholder="Masukkan password">
+        </div>
+        <button class="btn btn-primary btn-full btn-lg" onclick="handleRegister()" id="btn-register" style="margin-top:8px;">
+          Daftar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

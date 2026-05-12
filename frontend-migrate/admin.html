@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Venturee Admin Panel - Kelola event dan transaksi">
+  <title>Admin Panel - Venturee</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <span class="navbar-brand">Venturee - Admin</span>
+    <div class="navbar-actions">
+      <button class="nav-btn nav-btn-danger" onclick="handleAdminLogout()" id="btn-logout">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" id="tab-events" onclick="switchTab('events')">Manajemen Event</button>
+      <button class="tab" id="tab-transaksi" onclick="switchTab('transaksi')">Monitoring Transaksi</button>
+    </div>
+
+    <!-- Events Tab -->
+    <div id="panel-events">
+      <!-- Add Event Form -->
+      <div class="card" style="margin-bottom:24px;">
+        <h2 class="section-title" style="margin-bottom:16px;">Tambah Event Baru</h2>
+        <div class="form-group">
+          <label class="form-label" for="nama_event">Nama Event</label>
+          <input type="text" class="form-input" id="nama_event" placeholder="Masukkan nama event">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="deskripsi_event">Deskripsi Event</label>
+          <input type="text" class="form-input" id="deskripsi_event" placeholder="Masukkan deskripsi event">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="harga_event">Harga Event (Rp)</label>
+          <input type="number" class="form-input" id="harga_event" placeholder="0" min="0">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="kuota">Kuota</label>
+          <input type="number" class="form-input" id="kuota" placeholder="0" min="0">
+        </div>
+        <div id="form-message-container"></div>
+        <button class="btn btn-primary btn-full" onclick="handleAddEvent()" id="btn-add-event">Tambah Event</button>
+      </div>
+
+      <!-- Event List -->
+      <div id="events-list-container">
+        <div class="loading-container">
+          <div class="loading-spinner"></div>
+          <span class="loading-text">Memuat data...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transaksi Tab (hidden by default) -->
+    <div id="panel-transaksi" style="display:none;">
+      <div id="transaksi-list-container">
+        <div class="loading-container">
+          <div class="loading-spinner"></div>
+          <span class="loading-text">Memuat transaksi...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
