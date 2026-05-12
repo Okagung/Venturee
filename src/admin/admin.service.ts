@@ -37,7 +37,15 @@ export class AdminService {
 
   async getAllTransaksi() {
     return this.prisma.transaksi.findMany({
-      include: { user: true },
+      include: {
+        user: {
+          select: {
+            id_user: true,
+            username: true,
+            email: true,
+          },
+        },
+      },
     });
   }
 
