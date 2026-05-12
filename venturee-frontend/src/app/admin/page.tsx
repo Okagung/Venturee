@@ -38,7 +38,7 @@ export default function AdminPage() {
   useEffect(() => {
     const token = localStorage.getItem('admin_token');
     if (!token) {
-      router.push('/admin/login');
+      router.push('/auth');
       return;
     }
     fetchData();
@@ -82,7 +82,8 @@ export default function AdminPage() {
 
   const handleLogout = () => {
     localStorage.removeItem('admin_token');
-    router.push('/admin/login');
+    localStorage.removeItem('token');
+    router.push('/auth');
   };
 
   return (
