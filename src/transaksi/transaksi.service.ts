@@ -19,12 +19,31 @@ export class TransaksiService {
   }
 
   async create(dto: CreateTransaksiDto) {
-    return this.prisma.transaksi.create({
-      data: {
-        id_user: dto.id_user,
-        total_harga: dto.total_harga,
-        status: 'Sudah Dibayar',
-      },
+    return this.prisma.$transaction(async (prisma) => {
+      const keranjangItems = await prisma.keranjang.findMany({
+        where: { id_user: dto.id_user, status: 'Pending' },
+      });
+
+      const transaksi = await prisma.transaksi.create({
+        data: {
+          id_user: dto.id_user,
+          total_harga: dto.total_harga,
+          status: 'Sudah Dibayar',
+        },
+      });
+
+      for (const item of keranjangItems) {
+        await prisma.event.update({
+          where: { id_event: item.id_event },
+          data: { kuota: { decrement: 1 } },
+        });
+      }
+
+      await prisma.keranjang.deleteMany({
+        where: { id_user: dto.id_user, status: 'Pending' },
+      });
+
+      return transaksi;
     });
   }
 
