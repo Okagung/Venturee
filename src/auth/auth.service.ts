@@ -35,25 +35,42 @@ export class AuthService {
   }
 
   async login(dto: LoginDto) {
-    const user = await this.prisma.user.findUnique({
-      where: { email: dto.email },
+    // 1. Cek Admin
+    const admin = await this.prisma.admin.findUnique({
+      where: { username: dto.identifier },
     });
 
-    if (!user) {
-      throw new UnauthorizedException('Email atau password salah');
+    if (admin) {
+      const isPasswordValid = await bcrypt.compare(dto.password, admin.password);
+      if (isPasswordValid) {
+        const token = this.jwtService.sign({
+          sub: admin.id_admin,
+          username: admin.username,
+          role: 'admin',
+        });
+        return { access_token: token, role: 'admin' };
+      }
     }
 
-    const isPasswordValid = await bcrypt.compare(dto.password, user.password);
-
-    if (!isPasswordValid) {
-      throw new UnauthorizedException('Email atau password salah');
-    }
-
-    const token = this.jwtService.sign({
-      sub: user.id_user,
-      username: user.username,
+    // 2. Cek User
+    const user = await this.prisma.user.findFirst({
+      where: {
+        OR: [{ email: dto.identifier }, { username: dto.identifier }],
+      },
     });
 
-    return { access_token: token };
+    if (user) {
+      const isPasswordValid = await bcrypt.compare(dto.password, user.password);
+      if (isPasswordValid) {
+        const token = this.jwtService.sign({
+          sub: user.id_user,
+          username: user.username,
+          role: 'user',
+        });
+        return { access_token: token, role: 'user' };
+      }
+    }
+
+    throw new UnauthorizedException('Username/Email atau password salah');
   }
 }
