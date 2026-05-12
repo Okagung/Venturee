@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  id_admin Int    @id @default(autoincrement())
+  username String @unique
+  password String
+}
+
+model User {
+  id_user   Int         @id @default(autoincrement())
+  username  String      @unique
+  email     String      @unique
+  password  String
+  keranjang Keranjang[]
+  transaksi Transaksi[]
+}
+
+model Event {
+  id_event        Int         @id @default(autoincrement())
+  nama_event      String
+  deskripsi_event String?
+  harga_event     Int         @default(0)
+  kuota           Int         @default(0)
+  keranjang       Keranjang[]
+}
+
+model Keranjang {
+  id_keranjang Int    @id @default(autoincrement())
+  id_user      Int
+  id_event     Int
+  status       String @default("Pending")
+  user         User   @relation(fields: [id_user], references: [id_user])
+  event        Event  @relation(fields: [id_event], references: [id_event])
+}
+
+model Transaksi {
+  id_transaksi Int    @id @default(autoincrement())
+  id_user      Int
+  total_harga  Int
+  status       String @default("Belum Dibayar")
+  user         User   @relation(fields: [id_user], references: [id_user])
+}
